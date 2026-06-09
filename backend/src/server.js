@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
+import { pool } from './config/database.js'
 
 const app = express()
 
@@ -20,8 +21,16 @@ app.get('/health', (req, res) => {
     })
 })
 
+app.get('/db-test', async (req, res) => {
 
+    const result = await pool.query('SELECT NOW()')
 
+    res.json({
+        status: 'ok',
+        message: 'Banco conectado com sucesso',
+        databaseTime: result.rows[0].now
+    })
+})
 
 
 app.listen(PORT, () => {
