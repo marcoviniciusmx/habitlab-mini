@@ -1,0 +1,12 @@
+CREATE TABLE habits (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(120) NOT NULL,
+    description TEXT,
+    category VARCHAR(40),
+    frequency VARCHAR(40) NOT NULL DEFAULT 'Diário',
+    status VARCHAR(40) NOT NULL DEFAULT 'Ativo',
+    streak INTEGER NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
