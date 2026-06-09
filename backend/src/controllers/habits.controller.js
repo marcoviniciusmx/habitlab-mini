@@ -103,3 +103,23 @@ export async function updateHabit(req, res){
     return res.json(result.rows[0])
 
 }
+
+export async function deleteHabit(req, res) {
+    const { id } = req.params
+
+    const result = await pool.query(
+        'DELETE FROM habits WHERE id = $1 RETURNING *',
+        [id]
+    )
+
+    if (result.rows.length === 0) {
+        return res.status(400).json({
+            message: 'Hábito não encontrado'
+        })
+    }
+
+    return res.json({
+        message: 'Hábito deletado com sucesso.',
+        habit: result.rows[0]
+    })
+}
